@@ -1,0 +1,7 @@
+@function lightness-font($color){
+    @if ( lightness($bg-color) < 50% ) {
+        @return $color;
+    }@else{
+        @return $black;
+    }
+  }
