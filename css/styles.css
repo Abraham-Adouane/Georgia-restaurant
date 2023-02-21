@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300;400;600;700&display=swap");
-.brand-plate {
+.toggle, .brand-plate {
   display: grid;
   place-items: center;
 }
 
-.card-description, .brand {
+.card-description, .nav-menu, .brand {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -332,6 +332,10 @@ template {
   scroll-behavior: smooth;
 }
 
+li {
+  list-style-type: none;
+}
+
 body {
   font-family: "Nunito", sans-serif;
 }
@@ -395,6 +399,125 @@ header {
   color: #f1f1f1;
   margin-bottom: 50px;
 }
+.home-btn {
+  position: relative;
+  z-index: 5;
+}
+.home-btn::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #FFD700;
+  transform: scaley(0);
+  transform-origin: bottom;
+  transition: transform 300ms ease-in-out;
+}
+.home-btn:hover, .home-btn:focus {
+  color: white;
+}
+.home-btn:hover::after, .home-btn:focus::after {
+  transform: scaleX(1);
+  transform-origin: top;
+}
+
+#checkbox {
+  display: none;
+  visibility: hidden;
+  background-color: red;
+  position: absolute;
+  z-index: 50;
+  top: 50px;
+  left: 0px;
+  display: block;
+}
+#checkbox:checked ~ .nav-menu {
+  transform: translateX(-100%);
+}
+#checkbox:checked ~ .nav-pictures {
+  transform: translateX(100%);
+}
+
+.toggle {
+  gap: 6px;
+  width: 50px;
+  heigth: 50px;
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  z-index: 50;
+}
+.toggle span {
+  width: 30px;
+  height: 2px;
+  background-color: #FFD700;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row-reverse;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+.nav-menu {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  right: -50%;
+  background-color: #333;
+  flex-direction: column;
+  font-family: "Dancing Script", cursive;
+  transition: transform 300ms ease-in-out;
+}
+.nav-link {
+  color: #FFF;
+  font-size: 2rem;
+  transition: all 200ms ease-in-out;
+}
+.nav-link:hover {
+  background-color: #f1f1f1;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: #333;
+}
+.nav-pictures {
+  position: relative;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background-color: #404040;
+  transition: transform 300ms ease-in-out;
+}
+.nav-pictures li:nth-child(1) {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+.nav-pictures li:nth-child(2) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.nav-pictures li:nth-child(3) {
+  position: absolute;
+  top: 60%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+.nav-pictures li img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
 
 .gallery {
   display: grid;
@@ -402,6 +525,11 @@ header {
   max-width: 1200px;
   margin-inline: auto;
   gap: 0px;
+}
+@media screen and (max-width: 700px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .card {
@@ -437,8 +565,73 @@ header {
   color: #FFD700;
 }
 
+#about {
+  height: 500px;
+  background-color: #333;
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+}
+@media screen and (max-width: 900px) {
+  #about {
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px 300fr;
+    height: auto;
+  }
+}
+
+.picture-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.about-picture {
+  position: absolute;
+  top: 50%;
+  right: 150px;
+  transform: translateY(-50%);
+  overflow: hidden;
+  object-fit: cover;
+  object-position: right;
+  width: 500px;
+}
+.about-text {
+  padding-top: 100px;
+  width: 100%;
+  color: #f1f1f1;
+  text-align: center;
+}
+.about-title {
+  font-size: 2.5rem;
+  color: #FFD700;
+  font-family: "Dancing Script", cursive;
+}
+.about-subtitle {
+  margin: 20px 0 80px;
+}
+.about-description {
+  position: relative;
+  margin: 20px 20px;
+  text-align: justify;
+}
+.about-description::before, .about-description::after {
+  content: "***";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: #FFD700;
+}
+.about-description::before {
+  top: -25px;
+}
+.about-description::after {
+  bottom: -40px;
+}
+
 footer {
   padding-top: 50px;
+  background-color: #333;
 }
 footer p {
   text-align: center;
@@ -455,10 +648,6 @@ footer p {
 }
 .network a .fa-youtube {
   color: #FFD700;
-}
-
-body {
-  background-color: #5a5a5a;
 }
 
 /*# sourceMappingURL=styles.css.map */

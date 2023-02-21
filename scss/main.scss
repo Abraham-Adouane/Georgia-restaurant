@@ -6,10 +6,9 @@
 @import "./base/typography";
 @import "./components/buttons";
 @import "./layout/header";
+@import "./layout/navigation";
 @import "./layout/gallery";
+@import "./layout/about";
 @import "./layout/footer";
 
 
-body{
-    background-color: $bg-color;
-}
